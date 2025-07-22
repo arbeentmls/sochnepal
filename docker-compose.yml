@@ -36,6 +36,7 @@ services:
             - db
             - redis
             - worker
+            - ai-service
         entrypoint: /app/entrypoints/server-entrypoint.sh
 
     frontend:
@@ -43,6 +44,8 @@ services:
         volumes:
             - ./frontend:/app
             - frontend_node_modules:/app/node_modules
+        depends_on:
+            - backend
         ports:
             - 3000:3000
 

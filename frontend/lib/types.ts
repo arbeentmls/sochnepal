@@ -31,6 +31,22 @@ export interface Report {
     up_votes: number;
     has_upvoted: boolean;
     has_reported: boolean;
+    emotions: [
+        {
+            text: { id: number; content: string };
+            emotion: string;
+            score: number;
+            all_emotions: {
+                neutral: number;
+                sadness: number;
+                fear: number;
+                surprise: number;
+                joy: number;
+                anger: number;
+                disgust: number;
+            };
+        }
+    ];
 }
 
 export interface Category {

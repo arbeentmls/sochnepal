@@ -1,3 +1,6 @@
+import json
+
+import requests
 from django.db.models import Count, Exists, OuterRef
 from django_filters import rest_framework as filters
 from rest_framework.decorators import action
@@ -68,6 +71,25 @@ class ReportViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        response = requests.post(
+            "http://ai-service:8001/emotions",
+            json.dumps(
+                [
+                    {
+                        "id": serializer.data["id"],
+                        "content": serializer.data["description"],
+                    }
+                ]
+            ),
+        )
+        data_with_emotion = {**serializer.data}
+        data_with_emotion["emotions"] = response.json()["emotions"]
+        print(data_with_emotion)
+        return Response(data_with_emotion)
 
     @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
     def my(self, request):
