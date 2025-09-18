@@ -1,13 +1,12 @@
 import json
 
 import requests
+from apps.permissions import IsCommentOwnerOrReadOnly, IsVerifiedUserOrReadOnly
+from apps.reports.models import Report
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-
-from apps.permissions import IsCommentOwnerOrReadOnly, IsVerifiedUserOrReadOnly
-from apps.reports.models import Report
 
 from .models import Comment
 from .serializers import CommentSerializer
@@ -38,6 +37,7 @@ class CommentViewSet(ModelViewSet):
         if len(queryset) > 0:
             response = requests.post(
                 "http://ai-service:8001/predict-toxicity",
+
                 json.dumps(
                     [
                         {"id": value["id"], "comment": value["content"]}

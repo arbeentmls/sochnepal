@@ -1,4 +1,4 @@
-from fastapi import Body, FastAPI
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -27,6 +27,12 @@ class Comment(BaseModel):
 class CommentOut(Comment):
     confidence: float
     is_toxic: bool | None = False
+
+
+@app.get("/health")
+def health_check():
+    """Health check endpoint for Docker health checks"""
+    return {"status": "healthy"}
 
 
 @app.get("/")

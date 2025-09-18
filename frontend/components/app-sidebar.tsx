@@ -20,9 +20,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
     MapPin,
-    Home,
     FileText,
-    Plus,
     BarChart3,
     Settings,
     Users,
@@ -44,16 +42,16 @@ const AppSidebar = () => {
     const authStore = useAuthStore();
 
     const mainNavItems = [
-        {
-            title: "Dashboard",
-            url: "/dashboard",
-            icon: Home,
-        },
-        {
-            title: "Submit Report",
-            url: "#",
-            icon: Plus,
-        },
+        // {
+        //     title: "Dashboard",
+        //     url: "/dashboard",
+        //     icon: Home,
+        // },
+        // {
+        //     title: "Submit Report",
+        //     url: "#",
+        //     icon: Plus,
+        // },
         {
             title: "My Reports",
             url: "/dashboard/my-reports",
@@ -106,11 +104,11 @@ const AppSidebar = () => {
             url: "/contact",
             icon: HelpCircle,
         },
-        {
-            title: "Settings",
-            url: "#",
-            icon: Settings,
-        },
+        // {
+        //     title: "Settings",
+        //     url: "#",
+        //     icon: Settings,
+        // },
     ];
 
     const handleLogout = () => {
@@ -154,7 +152,7 @@ const AppSidebar = () => {
                 </SidebarGroup>
 
                 {/* Report Status */}
-                <SidebarGroup>
+                {/* <SidebarGroup>
                     <SidebarGroupLabel>Report Status</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
@@ -176,10 +174,10 @@ const AppSidebar = () => {
                             ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
-                </SidebarGroup>
+                </SidebarGroup> */}
 
                 {/* Community */}
-                <SidebarGroup>
+                {/* <SidebarGroup>
                     <SidebarGroupLabel>Community</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
@@ -198,7 +196,7 @@ const AppSidebar = () => {
                             ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
-                </SidebarGroup>
+                </SidebarGroup> */}
 
                 {/* Support */}
                 <SidebarGroup>

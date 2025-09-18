@@ -40,7 +40,7 @@ export const useLogin = () => {
                 is_verified: false,
             });
             toast.success("Logged in successfully");
-            router.push("/dashboard");
+            router.push("/dashboard/my-reports");
             form.reset();
         },
         onError: (error) => {

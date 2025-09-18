@@ -1,63 +1,145 @@
+# services:
+#     db:
+#         image: postgres:14.18-bookworm
+#         ports:
+#             - 5433:5432
+#         env_file:
+#             - ./backend/.env
+#         volumes:
+#             - sochnepal-db-volume:/var/lib/postgresql/data
+
+#     redis:
+#         image: redis:8.0.3-alpine
+#         expose:
+#             - 6379
+
+#     worker:
+#         build: ./backend/
+#         env_file:
+#             - ./backend/.env
+#         depends_on:
+#             - db
+#             - redis
+#         entrypoint: /app/entrypoints/worker-entrypoint.sh
+
+#     backend:
+#         build: ./backend/
+#         volumes:
+#             - ./backend:/app
+#             - media-data:/app/media
+#             - static-data:/app/static
+#         ports:
+#             - 8000:8000
+#         env_file:
+#             - ./backend/.env
+#         depends_on:
+#             - db
+#             - redis
+#             - worker
+#             - ai-service
+#         entrypoint: /app/entrypoints/server-entrypoint.sh
+
+#     frontend:
+#         build: ./frontend/
+#         volumes:
+#             - ./frontend:/app
+#             - frontend_node_modules:/app/node_modules
+#         depends_on:
+#             - backend
+#         ports:
+#             - 3000:3000
+
+#     ai-service:
+#         build: ./ai-service/
+#         ports:
+#             - 8001:8001
+#         volumes:
+#             - ./ai-service:/app
+
+# volumes:
+#     sochnepal-db-volume:
+#     media-data:
+#     static-data:
+#     frontend_node_modules:
+
+
 services:
-    db:
-        image: postgres:14.18-bookworm
-        ports:
-            - 5433:5432
-        env_file:
-            - ./backend/.env
-        volumes:
-            - sochnepal-db-volume:/var/lib/postgresql/data
+  db:
+    image: postgres:14.18-bookworm
+    ports:
+      - 5433:5432
+    env_file:
+      - ./backend/.env
+    volumes:
+      - sochnepal-db-volume:/var/lib/postgresql/data
 
-    redis:
-        image: redis:8.0.3-alpine
-        expose:
-            - 6379
 
-    worker:
-        build: ./backend/
-        env_file:
-            - ./backend/.env
-        depends_on:
-            - db
-            - redis
-        entrypoint: /app/entrypoints/worker-entrypoint.sh
+  redis:
+    image: redis:8.0.3-alpine
+    expose:
+      - 6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
-    backend:
-        build: ./backend/
-        volumes:
-            - ./backend:/app
-            - media-data:/app/media
-            - static-data:/app/static
-        ports:
-            - 8000:8000
-        env_file:
-            - ./backend/.env
-        depends_on:
-            - db
-            - redis
-            - worker
-            - ai-service
-        entrypoint: /app/entrypoints/server-entrypoint.sh
+  ai-service:
+    build: ./ai-service/
+    ports:
+      - 8001:8001
+    volumes:
+      - ./ai-service:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
-    frontend:
-        build: ./frontend/
-        volumes:
-            - ./frontend:/app
-            - frontend_node_modules:/app/node_modules
-        depends_on:
-            - backend
-        ports:
-            - 3000:3000
+  worker:
+    build: ./backend/
+    env_file:
+      - ./backend/.env
+    depends_on:
+      redis:
+        condition: service_healthy
+    entrypoint: /app/entrypoints/worker-entrypoint.sh
 
-    ai-service:
-        build: ./ai-service/
-        ports:
-            - 8001:8001
-        volumes:
-            - ./ai-service:/app
+  backend:
+    build: ./backend/
+    volumes:
+      - ./backend:/app
+      - media-data:/app/media
+      - static-data:/app/static
+    ports:
+      - 8000:8000
+    env_file:
+      - ./backend/.env
+    depends_on:
+      redis:
+        condition: service_healthy
+      ai-service:
+        condition: service_healthy
+      worker:
+        condition: service_started
+    entrypoint: /app/entrypoints/server-entrypoint.sh
+
+  frontend:
+    build: ./frontend/
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      backend:
+        condition: service_started
+      ai-service:
+        condition: service_healthy
+    ports:
+      - 3000:3000
 
 volumes:
-    sochnepal-db-volume:
-    media-data:
-    static-data:
-    frontend_node_modules:
+  sochnepal-db-volume:
+  media-data:
+  static-data:
+  frontend_node_modules:
