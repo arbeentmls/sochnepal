@@ -36,7 +36,7 @@ class CommentViewSet(ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         if len(queryset) > 0:
             response = requests.post(
-                "http://ai-service:8001/predict-toxicity",
+                "http://localhost:8001/predict-toxicity",
 
                 json.dumps(
                     [

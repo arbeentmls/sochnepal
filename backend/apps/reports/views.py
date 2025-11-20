@@ -1,23 +1,24 @@
 import json
 
 import requests
+from apps.flags.models import Flag
+from apps.permissions import IsVerifiedUserOrReadOnly
 from django.db.models import Count, Exists, OuterRef
 from django_filters import rest_framework as filters
 from rest_framework.decorators import action
 from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.parsers import JSONParser, MultiPartParser
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import (IsAuthenticated,
+                                        IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-
-from apps.flags.models import Flag
-from apps.permissions import IsVerifiedUserOrReadOnly
 
 from .filters import ReportFilter
 from .models import Category, Report, UpVote
 from .pagination import ReportPagination
 from .permissions import IsOwnerOrReadOnly
-from .serializers import CategoryListSerializer, ReportSerializer, UpVoteSerializer
+from .serializers import (CategoryListSerializer, ReportSerializer,
+                          UpVoteSerializer)
 
 
 class ReportViewSet(ModelViewSet):
@@ -76,7 +77,7 @@ class ReportViewSet(ModelViewSet):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         response = requests.post(
-            "http://ai-service:8001/emotions",
+            "http://localhost:8001/emotions",
             json.dumps(
                 [
                     {
