@@ -1,0 +1,36 @@
+text,true_emotion,predicted_emotion,confidence,correct
+I'm so furious about this situation!,anger,anger,0.983,True
+This makes me absolutely livid and frustrated!,anger,anger,0.985,True
+"I can't believe they did this, I'm outraged!",anger,anger,0.974,True
+"Stop bothering me, I'm really annoyed!",anger,anger,0.945,True
+This is completely unacceptable and infuriating!,anger,anger,0.969,True
+I'm so happy and excited about this news!,joy,joy,0.985,True
+"This is the best day ever, I feel amazing!",joy,surprise,0.948,False
+I'm thrilled and overjoyed with the results!,joy,joy,0.989,True
+"What a wonderful experience, I'm so grateful!",joy,joy,0.929,True
+"I love this so much, it brings me pure happiness!",joy,joy,0.991,True
+I feel so heartbroken and depressed about this.,sadness,sadness,0.99,True
+This makes me really sad and disappointed.,sadness,sadness,0.984,True
+I'm feeling down and melancholic today.,sadness,sadness,0.991,True
+Everything feels hopeless and gloomy.,sadness,sadness,0.985,True
+"I miss them so much, it hurts.",sadness,sadness,0.981,True
+I'm really scared and anxious about what might happen.,fear,fear,0.994,True
+This situation terrifies me completely.,fear,fear,0.971,True
+I'm worried and afraid of the consequences.,fear,fear,0.993,True
+The thought of this makes me nervous and panicked.,fear,fear,0.991,True
+I feel threatened and unsafe in this environment.,fear,fear,0.995,True
+"Wow, I didn't expect that at all!",surprise,surprise,0.979,True
+This is so unexpected and shocking!,surprise,surprise,0.92,True
+I'm amazed and astonished by this revelation!,surprise,surprise,0.978,True
+What a surprising turn of events!,surprise,surprise,0.971,True
+"I can't believe this just happened, so unexpected!",surprise,surprise,0.978,True
+This is absolutely revolting and disgusting.,disgust,disgust,0.978,True
+I find this repulsive and nauseating.,disgust,disgust,0.962,True
+That's gross and makes me feel sick.,disgust,disgust,0.982,True
+I'm appalled by this disturbing behavior.,disgust,disgust,0.823,True
+This is vile and completely repugnant.,disgust,disgust,0.971,True
+The meeting is scheduled for 3 PM tomorrow.,neutral,neutral,0.704,True
+Please submit the report by end of day.,neutral,neutral,0.933,True
+The weather forecast shows rain this week.,neutral,neutral,0.455,True
+Here is the information you requested.,neutral,neutral,0.959,True
+The document has been updated accordingly.,neutral,neutral,0.959,True

@@ -1,0 +1,131 @@
+{
+  "model_id": "j-hartmann/emotion-english-distilroberta-base",
+  "overall_accuracy": 0.9714285714285714,
+  "average_confidence": 0.9464285714285716,
+  "per_emotion_metrics": {
+    "anger": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "support": 5
+    },
+    "disgust": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "support": 5
+    },
+    "fear": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "support": 5
+    },
+    "joy": {
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1_score": 0.8888888888888888,
+      "support": 5
+    },
+    "neutral": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "support": 5
+    },
+    "sadness": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "support": 5
+    },
+    "surprise": {
+      "precision": 0.8333333333333334,
+      "recall": 1.0,
+      "f1_score": 0.9090909090909091,
+      "support": 5
+    }
+  },
+  "confusion_matrix": [
+    [
+      5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      5,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      5,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      4,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      5,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      5,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      5
+    ]
+  ],
+  "test_size": 35,
+  "misclassified_count": 1,
+  "emotional_context": {
+    "dominant_emotion": "surprise",
+    "dominant_score": 0.165,
+    "average_confidence": 0.946,
+    "emotion_breakdown": {
+      "anger": 0.139,
+      "disgust": 0.135,
+      "fear": 0.141,
+      "joy": 0.111,
+      "neutral": 0.115,
+      "sadness": 0.141,
+      "surprise": 0.165
+    },
+    "total_analyzed": 35
+  }
+}
