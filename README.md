@@ -1,4 +1,4 @@
-# SochNepal 🏛️A collaboration project by @bluescorpio01234 and @sulavmhrzh.
+# SochNepal 🏛️A collaboration project by @arbeentmls and @sulavmhrzh.
 
 A civic engagement platform that empowers Nepali citizens to report, track, and resolve community issues. Built to strengthen democracy through digital participation and government accountability.
 
